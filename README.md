@@ -241,6 +241,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📞 Contact
 
-Your Name - your.email@example.com
+ Name -collinsngene@gmail.com
 
-Project Link: [https://github.com/yourusername/vending-machine-api](https://github.com/yourusername/vending-machine-api)
+Project Link: [https://github.com/collinsdev-prog/vending-machine-api](https://github.com/collinsdev-prog/vending-machine-api)
