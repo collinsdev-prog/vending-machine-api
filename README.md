@@ -1,246 +1,160 @@
-# Vending Machine API
+# VASCON Code Challenge
 
-A full-stack application that simulates a vending machine API with user authentication, product management, and purchase functionality.
+A full-stack vending machine system built with **NestJS** (Backend) and **Next.js/React** (Frontend). This solution provides role-based functionality where **Sellers** can manage products and **Buyers** can deposit coins and make purchases.
 
-## 🚀 Features
+---
 
-- **User Management**:
-  - User registration and authentication using JWT
-  - Role-based authorization (Seller and Buyer roles)
-  - Session management with multi-session detection
-  - Password security with bcrypt hashing
+## 🧠 Project Overview
 
-- **Product Management**:
-  - Full CRUD operations for products
-  - Role-based access control (Sellers can only manage their own products)
-  - Product availability tracking
+This project implements a vending machine API and web interface with the following core capabilities:
 
-- **Vending Machine Operations**:
-  - Coin deposit system (accepts 5, 10, 20, 50, and 100 cent coins)
-  - Purchase functionality with product validation
-  - Change calculation and return
-  - Deposit reset capability
+- Role-based access control (`buyer`, `seller`)
+- Product management (CRUD for sellers)
+- Coin deposit, purchase, and change calculation
+- JWT-based authentication
+- Session management with multi-device awareness
+- Fullstack architecture using modern technologies
 
-- **Security Features**:
-  - JWT authentication
-  - Password hashing
-  - Role-based permissions
-  - Input validation
-  - Multi-session detection and management
+---
 
-## 🔧 Tech Stack
+## 📁 Project Structure
 
-### Backend
-- **Framework**: NestJS
-- **Database**: MongoDB with Mongoose
-- **Authentication**: JWT
-- **Testing**: Jest
+vascon-code-challenge/
+├── backend/ # NestJS backend
+│ ├── src/
+│ └── ...
+├── frontend/ # React/Next.js frontend
+│ ├── pages/
+│ └── ...
+└── README.md
 
-### Frontend
-- **Framework**: React
-- **State Management**: Redux
-- **UI Library**: Material-UI
-- **HTTP Client**: Axios
-- **CSS**: Custom CSS stylesheets
-- **Testing**: React Testing Library
+yaml
+Copy
+Edit
 
-## 📋 API Endpoints
+---
 
-### User Endpoints
-- `POST /user` - Register a new user (public)
-- `GET /user` - Get all users (authenticated)
-- `GET /user/:id` - Get a specific user (authenticated)
-- `PUT /user/:id` - Update a user (authenticated, own account only)
-- `DELETE /user/:id` - Delete a user (authenticated, own account only)
-- `POST /user/login` - User login
-- `POST /user/logout/all` - Logout from all active sessions
+## 🚀 Technologies Used
 
-### Product Endpoints
-- `POST /product` - Create a product (seller only)
-- `GET /product` - Get all products (public)
-- `GET /product/:id` - Get a specific product (public)
-- `PUT /product/:id` - Update a product (authenticated, product owner only)
-- `DELETE /product/:id` - Delete a product (authenticated, product owner only)
+### Backend (NestJS)
 
-### Vending Machine Endpoints
-- `POST /deposit` - Deposit coins (buyer only)
-- `POST /buy` - Purchase products (buyer only)
-- `POST /reset` - Reset deposit to 0 (buyer only)
+- NestJS + Express
+- MySQL (raw SQL)
+- Redis (for session management)
+- JWT Authentication
+- Jest (unit testing)
 
-## 🛠️ Setup and Installation
+### Frontend (Next.js / React)
+
+- Next.js
+- Context API
+- CSS Modules
+- Axios
+
+---
+
+## 🔐 User Roles
+
+| Role   | Capabilities                               |
+| ------ | ------------------------------------------ |
+| Seller | Create, update, delete products            |
+| Buyer  | Deposit coins, buy products, reset deposit |
+
+---
+
+## 📦 Backend API Features
+
+- User Registration & Authentication
+- CRUD for Products (`seller` only)
+- Deposit Coins (`buyer` only)
+- Buy Products (`buyer` only)
+- Reset Deposit (`buyer` only)
+- Session Management (Force logout other sessions)
+- Authenticated Endpoints (except `/user/register` and product `GET`)
+
+---
+
+## 🔧 How to Run the Project
 
 ### Prerequisites
-- Node.js (v14.x or higher)
-- MongoDB (local or Atlas URI)
-- npm or yarn
 
-### Backend Setup
-1. Clone the repository
-   ```bash
-   git clone https://github.com/yourusername/vending-machine-api.git
-   cd vending-machine-api/backend
-   ```
+- Node.js (v18+)
+- MySQL
+- Redis
 
-2. Install dependencies
-   ```bash
-   npm install
-   ```
+---
 
-3. Create a `.env` file with the following variables:
-   ```
-   MONGODB_URI=your_mongodb_connection_string
-   JWT_SECRET=your_jwt_secret
-   JWT_EXPIRATION=3600
-   PORT=3001
-   ```
+### Backend
 
-4. Start the development server
-   ```bash
-   npm run start:dev
-   ```
-
-### Frontend Setup
-1. Navigate to the frontend directory
-   ```bash
-   cd ../frontend
-   ```
-
-2. Install dependencies
-   ```bash
-   npm install
-   ```
-
-3. Create a `.env` file with the following variable:
-   ```
-   REACT_APP_API_URL=http://localhost:3001
-   ```
-
-4. Start the development server
-   ```bash
-   npm start
-   ```
-
-## 🧪 Running Tests
-
-### Backend Tests
 ```bash
 cd backend
-npm run test
-```
+npm install
+# Setup .env for MySQL, Redis, JWT keys
+npm run start:dev
 
-### Frontend Tests
-```bash
+### Frontend
+
+bash
+Copy
+Edit
 cd frontend
+npm install
+npm run dev
+
+🧪 Tests
+Backend includes unit tests for:
+
+/deposit
+
+/buy
+
+Product CRUD
+
+Run tests using:
+
+bash
+Copy
+Edit
+cd backend
 npm run test
-```
 
-## 📱 Usage
+🌐 API Endpoints
+Method	Endpoint	Auth	Role	Description
+POST	/user/register	❌	Public	Register a new user
+POST	/user/login	❌	Public	Login and receive JWT
+POST	/product	✅	Seller	Add a new product
+PUT	/product/:id	✅	Seller	Update product (by creator only)
+DELETE	/product/:id	✅	Seller	Delete product (by creator only)
+GET	/product	❌	Public	View all products
+POST	/deposit	✅	Buyer	Deposit coins (5,10,20,50,100)
+POST	/buy	✅	Buyer	Buy product, receive change
+POST	/reset	✅	Buyer	Reset deposit to 0
+POST	/logout/all	✅	All	Terminate all active sessions
 
-### User Registration
-Register as either a buyer or seller:
-```
-POST /user
-{
-  "username": "user123",
-  "password": "securePassword",
-  "role": "buyer" // or "seller"
-}
-```
+⚠️ Edge Cases Considered
+Insufficient deposit on purchase
 
-### Deposit Coins (Buyer)
-```
-POST /deposit
-{
-  "coin": 20 // Accepts only 5, 10, 20, 50, or 100
-}
-```
+Product out of stock
 
-### Buy Products (Buyer)
-```
-POST /buy
-{
-  "productId": "product_id_here",
-  "amount": 2
-}
-```
+Invalid coin denominations
 
-### Add Product (Seller)
-```
-POST /product
-{
-  "productName": "Candy Bar",
-  "cost": 65,
-  "amountAvailable": 10
-}
-```
+Session hijacking / multi-login enforcement
 
-## 🧰 Project Structure
+Unauthorized access to restricted resources
+
+🧪 Postman Collection
+A Postman collection is available locally for validating all endpoints. Please request it during code review or testing.
+
+📌 Bonus Feature
+🔄 Multi-device session detection and termination (/logout/all)
+
+🛡️ Strong focus on access control and endpoint protection
+
+⏱️ Timeline
+Total time for completion: 7 days
+Make sure to have the project running locally and a working Postman setup for demonstration.
+
+📫 Contact
+For any issues or clarifications, feel free to open an issue or reach out via GitHub.
 
 ```
-vending-machine-api/
-├── backend/
-│   ├── src/
-│   │   ├── config/
-│   │   ├── controllers/
-│   │   ├── dtos/
-│   │   ├── guards/
-│   │   ├── interfaces/
-│   │   ├── middleware/
-│   │   ├── models/
-│   │   ├── services/
-│   │   ├── utils/
-│   │   └── main.ts
-│   ├── test/
-│   └── package.json
-├── frontend/
-│   ├── public/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   ├── store/
-│   │   ├── styles/
-│   │   ├── utils/
-│   │   └── App.js
-│   └── package.json
-└── README.md
-```
-
-## 🧩 Edge Cases Handled
-
-- Attempting to buy more products than available
-- Insufficient funds for purchase
-- Invalid coin denominations
-- Handling of change calculation
-- Product not found or no longer available
-- Session conflict detection
-- Role-based permission validation
-- Input validation for all endpoints
-
-## 🔐 Security Considerations
-
-- Passwords are hashed using bcrypt
-- JWT tokens are used for secure authentication
-- Authorization checks on all protected endpoints
-- Input validation to prevent injection attacks
-- CORS configuration
-- Rate limiting for sensitive endpoints
-- Detection of multiple active sessions
-
-## 👥 Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 📞 Contact
-
- Name -collinsngene@gmail.com
-
-Project Link: [https://github.com/collinsdev-prog/vending-machine-api](https://github.com/collinsdev-prog/vending-machine-api)
