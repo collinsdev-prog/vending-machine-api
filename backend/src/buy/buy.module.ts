@@ -3,16 +3,11 @@ import { BuyService } from './buy.service';
 import { MysqlService } from '../mysql/mysql.service';
 import { DepositService } from '../deposit/deposit.service';
 import { UserService } from '../user/user.service';
-import { BuyController } from './buy.controller'; // If you are using a controller to handle routes
+import { BuyController } from './buy.controller';
 
 @Module({
-  imports: [], // Add any other modules here if needed (e.g., DatabaseModule, AuthModule, etc.)
-  controllers: [BuyController], // Register BuyController if you're using it
-  providers: [
-    BuyService,
-    MysqlService,
-    DepositService,
-    UserService, // These services are injected into BuyService
-  ],
+  imports: [],
+  controllers: [BuyController],
+  providers: [BuyService, MysqlService, DepositService, UserService],
 })
 export class BuyModule {}

@@ -11,5 +11,5 @@ export class BuyDto {
 
   @IsOptional()
   @IsString()
-  description?: string; // Optional: Any extra description or note for the purchase
+  description?: string; // Optional description of the purchase
 }

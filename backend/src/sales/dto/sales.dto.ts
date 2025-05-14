@@ -9,7 +9,7 @@ import {
 export class SalesDto {
   @IsNumber()
   @IsPositive()
-  productId: number; // Assuming you are referencing the product ID in the sale
+  productId: number;
 
   @IsNumber()
   @Min(1)
@@ -21,5 +21,5 @@ export class SalesDto {
 
   @IsString()
   @IsOptional()
-  description?: string; // Optional description for the sale (e.g., special discount, etc.)
+  description?: string; // Optional description for the sale
 }

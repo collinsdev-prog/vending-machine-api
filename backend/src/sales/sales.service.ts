@@ -91,7 +91,7 @@ export class SalesService {
       userId,
     ]);
 
-    const row = rows[0];
+    const row = rows[0] as RawSaleStatsRow | undefined;
 
     return {
       totalProducts: row?.totalProducts ?? 0,
@@ -99,20 +99,4 @@ export class SalesService {
       totalRevenue: row?.totalRevenue ?? 0,
     };
   }
-
-  /**
-   * Additional method to fetch specific sales by ID, if necessary
-   */
-  //   async getSaleById(saleId: number): Promise<any> {
-  //     const query = `
-  //         SELECT * FROM sales WHERE id = ?
-  //       `;
-  //     const result: any[] = await this.mysql.execute(query, [saleId]);
-
-  //     if (!result[0]) {
-  //       throw new NotFoundException('Sale not found');
-  //     }
-
-  //     return result[0];
-  //   }
 }
