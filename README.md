@@ -28,10 +28,6 @@ vascon-code-challenge/
 │ └── ...
 └── README.md
 
-yaml
-Copy
-Edit
-
 ---
 
 ## 🚀 Technologies Used
