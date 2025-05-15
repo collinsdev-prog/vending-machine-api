@@ -15,6 +15,7 @@ import { DepositModule } from './deposit/deposit.module';
 import { ProductModule } from './product/product.module';
 import { BuyModule } from './buy/buy.module';
 import { SessionModule } from './session/session.module';
+import { SalesModule } from './sales/sales.module';
 
 import { JwtStrategy } from './auth/jwt.strategy';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
@@ -37,6 +38,7 @@ import { RolesGuard } from './auth/role.guard';
     ProductModule,
     BuyModule,
     SessionModule,
+    SalesModule,
   ],
   controllers: [AppController],
   providers: [

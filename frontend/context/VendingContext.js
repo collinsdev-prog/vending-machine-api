@@ -43,7 +43,8 @@ export const VendingProvider = ({ children }) => {
   
   const fetchSalesStats = useCallback(async () => {
     try {
-      const res = await api('/user/my-sales-stats', 'GET');
+      const res = await api('/sales/stats', 'GET');
+      console.log('✅ Sales Stats Response:', res); // Inspect structure
       setSalesStats(res.data);
       return res.data;
     } catch (error) {

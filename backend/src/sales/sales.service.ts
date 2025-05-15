@@ -74,9 +74,9 @@ export class SalesService {
 
     const query = `
       SELECT
-        (SELECT COUNT(*) FROM products WHERE user_id = ?) AS totalProducts,
-        (SELECT COALESCE(SUM(quantity), 0) FROM sales WHERE user_id = ?) AS totalProductsSold,
-        (SELECT COALESCE(SUM(total_price), 0) FROM sales WHERE user_id = ?) AS totalRevenue
+        (SELECT COUNT(*) FROM products WHERE sellerId = ?) AS totalProducts,
+        (SELECT COALESCE(SUM(quantity), 0) FROM sales WHERE seller_id = ?) AS totalProductsSold,
+        (SELECT COALESCE(SUM(total_price), 0) FROM sales WHERE seller_id = ?) AS totalRevenue
     `;
 
     type RawSaleStatsRow = {

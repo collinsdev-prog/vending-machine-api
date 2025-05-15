@@ -90,11 +90,11 @@ const SellerDashboard = () => {
                 </div>
                 <div className="stat-item">
                   <h3>Total Sold</h3>
-                  <p className="stat-value">{salesStats?.totalSold || 0}</p>
+                  <p className="stat-value">{salesStats?.totalProductsSold || 0}</p>
                 </div>
                 <div className="stat-item">
                   <h3>Revenue</h3>
-                  <p className="stat-value">{salesStats?.revenue || 0} cents</p>
+                  <p className="stat-value">{salesStats?.totalRevenue || 0} cents</p>
                 </div>
               </div>
             )}
